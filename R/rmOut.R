@@ -21,8 +21,8 @@ rmOut <- function(dat){
   resid <- residuals(loessMod)
   
   #Plots the data and loess curve
-  plot(dat$day, dat$value, xlab="Day of year",ylab="Dominant period")
-  points(dat$day, fitted(loessMod), col="purple", pch=20)
+  #plot(dat$day, dat$value, xlab="Day of year",ylab="Dominant period")
+  #points(dat$day, fitted(loessMod), col="purple", pch=20)
   
   #Determines the interquartile range of residual values
   resid.q <- quantile(resid,prob=c(0.25,0.75))
@@ -34,7 +34,7 @@ rmOut <- function(dat){
   #calculates number of IQR's away as "score" 
   out <- abs(pmin((resid-limits[1])/iqr,0) + pmax((resid - limits[2])/iqr,0))
   
-  #If the point is within 1.5x the interquartile range, the row is turned to NA
+  #If the point is outside 1.5x the interquartile range, the row is turned to NA
   dat[which(out > 0), ] <- NA
   
   return(dat)
