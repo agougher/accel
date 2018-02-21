@@ -6,6 +6,30 @@ This package includes functions to read in and analyze accelerometer data genera
 ```{r, eval = FALSE}
 #Install
 dev.tools::install_github("agougher/acel")
+```
 
+##Example data
+```{r}
+require(accel)
+data(al3)
+head(al3)
+```
+
+```{r}
+domY <- al3[,c("day","peakY","wpeakY")]
+domZ <- al3[,c("day","peakZ","wpeakZ")]
+colnames(domY) <- c("day","value","weights")
+colnames(domZ) <- c("day","value","weights")
+
+dat <- rbind(domY,domZ)
+
+plot(dat$day, dat$value, xlab="Day of year",ylab="Dominant period")
+```
+
+##Removing outlier 
+```{r}
+dat2 <- rmOut(dat)
+plot(dat$day, dat$value)
+points(dat2$day, dat2$value, pch=20, col="purple", xlab="Day of year",ylab="Dominant period")
 ```
 
