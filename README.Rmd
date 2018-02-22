@@ -72,3 +72,11 @@ plot(dat2$day, dat2$value, pch=20, xlab="Day of year",ylab="Dominant period")
 points(dat2$day, fitted(mod), pch=20, col="red", lwd=4)
 abline(v=c(coef(mod)[3],coef(mod)[5]))
 ```
+
+##Extracting temperature from an accelerometer file
+
+```{r}
+data(accelFile)
+temps <- extractTemp(accelFile)
+```
+
