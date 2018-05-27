@@ -47,8 +47,8 @@ This function, `rmOut`, identifies and removes points that have residuals beyond
 ```{r}
 #The 'rmOut' function requires a dataframe with three columns named "day","value", and "weights"
 dat2 <- rmOut(dat)
-plot(dat$day, dat$value)
-points(dat2$day, dat2$value, pch=20, col="purple", xlab="Day of year",ylab="Dominant period")
+plot(dat$day, dat$value, xlab="Day of year",ylab="Dominant period")
+points(dat2$day, dat2$value, pch=20, col="purple")
 ```
 
 ##Fitting phenology model described by [Elmore et al. 2012](http://onlinelibrary.wiley.com/doi/10.1111/j.1365-2486.2011.02521.x/full)
@@ -69,7 +69,7 @@ mod = nls(value ~ a + (b- g*day)*((1/(1+exp((c-day)/d))) - (1/(1+exp((e-day)/f))
 
 #Plot data, and fitted values
 #Units are in tenths of seconds, so divide by 10 to convert to seconds
-plot(dat2$day, dat2$value/10, pch=20, xlab="Day of year",ylab="Dominant period")
+plot(dat2$day, dat2$value/10, pch=20, xlab="Day of year",ylab="Dominant period (s)")
 points(dat2$day, fitted(mod)/10, pch=20, col="red", lwd=4)
 abline(v=c(coef(mod)[3],coef(mod)[5]))
 ```
