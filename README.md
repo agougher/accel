@@ -64,8 +64,8 @@ This function, `rmOut`, identifies and removes points that have residuals beyond
 ``` r
 #The 'rmOut' function requires a dataframe with three columns named "day","value", and "weights"
 dat2 <- rmOut(dat)
-plot(dat$day, dat$value)
-points(dat2$day, dat2$value, pch=20, col="purple", xlab="Day of year",ylab="Dominant period")
+plot(dat$day, dat$value, xlab="Day of year",ylab="Dominant period")
+points(dat2$day, dat2$value, pch=20, col="purple")
 ```
 
 ![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
@@ -88,8 +88,9 @@ mod = nls(value ~ a + (b- g*day)*((1/(1+exp((c-day)/d))) - (1/(1+exp((e-day)/f))
              algorithm="port",control = list(maxiter = 500), data=dat2, weights=dat2$weights^2)
 
 #Plot data, and fitted values
-plot(dat2$day, dat2$value, pch=20, xlab="Day of year",ylab="Dominant period")
-points(dat2$day, fitted(mod), pch=20, col="red", lwd=4)
+#Units are in tenths of seconds, so divide by 10 to convert to seconds
+plot(dat2$day, dat2$value/10, pch=20, xlab="Day of year",ylab="Dominant period (s)")
+points(dat2$day, fitted(mod)/10, pch=20, col="red", lwd=4)
 abline(v=c(coef(mod)[3],coef(mod)[5]))
 ```
 
