@@ -12,6 +12,21 @@ Installation
 devtools::install_github("agougher/accel")
 ```
 
+Raw data
+========
+
+To get a sense of what raw data looks like, there are several files available [here](https://github.com/agougher/Public-data/tree/master/accel). If you download these files to your working directory, you can analyze them with the code below. The season-length example data below was processed in the same way, but for about 250 files.
+
+``` r
+require(gtools)
+x <- mixedsort(list.files("./", pattern="CSV", full.names=TRUE))
+ex1 <- lapply(x,readAndDom)
+ex1 <- data.frame(do.call(rbind, ex1))
+
+plot(1:5, ex1$peakY,pch=20, col="red")
+points(1:5, ex1$peakZ, pch=20)
+```
+
 Example data
 ------------
 
@@ -54,7 +69,7 @@ dat <- rbind(domY,domZ)
 plot(dat$day, dat$value, cex=dat$weights*2, xlab="Day of year",ylab="Dominant period")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-3-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 Removing outliers
 -----------------
@@ -68,7 +83,7 @@ plot(dat$day, dat$value, xlab="Day of year",ylab="Dominant period")
 points(dat2$day, dat2$value, pch=20, col="purple")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
 Fitting phenology model described by [Elmore et al. 2012](http://onlinelibrary.wiley.com/doi/10.1111/j.1365-2486.2011.02521.x/full)
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -94,4 +109,4 @@ points(dat2$day, fitted(mod)/10, pch=20, col="red", lwd=4)
 abline(v=c(coef(mod)[3],coef(mod)[5]))
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
