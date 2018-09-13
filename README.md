@@ -10,6 +10,11 @@ Installation
 ``` r
 #Install from github
 devtools::install_github("agougher/accel")
+
+#Load other required packages
+require(forecast)
+require(pracma)
+require(gtools)
 ```
 
 Raw data
@@ -18,7 +23,6 @@ Raw data
 To get a sense of what raw accelerometer data looks like, there are several files available [here](https://github.com/agougher/Public-data/tree/master/accel). If you download these files to your working directory, you can analyze them with the code below. The season-length example data below was processed in the same way, but for about 250 files.
 
 ``` r
-require(gtools)
 #List files in order and calculates dominant period
 x <- mixedsort(list.files("./", pattern="CSV", full.names=TRUE))
 ex1 <- lapply(x,readAndDom)
