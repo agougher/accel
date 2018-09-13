@@ -11,8 +11,12 @@ This package includes functions to read in and analyze accelerometer data genera
 ```{r, eval = FALSE}
 #Install from github
 devtools::install_github("agougher/accel")
+```
 
-#Load other required packages
+
+```{r, , message=FALSE}
+#Load packages
+require(accel)
 require(forecast)
 require(pracma)
 require(gtools)
@@ -51,7 +55,6 @@ al3["day"] <- 61:310
 The example data includes the dominant period values for each of three dimensional axes (x, y, z), and weights reflective of the difference between the dominant and second-most dominant periods for each axis, for a single accelerometer.
 ```{r, message=FALSE}
 #Load example data and make long form dataframe for functions below
-require(accel) 
 data(al3)
 head(al3)
 

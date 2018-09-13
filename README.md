@@ -10,8 +10,11 @@ Installation
 ``` r
 #Install from github
 devtools::install_github("agougher/accel")
+```
 
-#Load other required packages
+``` r
+#Load packages
+require(accel)
 require(forecast)
 require(pracma)
 require(gtools)
@@ -52,7 +55,6 @@ The example data includes the dominant period values for each of three dimension
 
 ``` r
 #Load example data and make long form dataframe for functions below
-require(accel) 
 data(al3)
 head(al3)
 ```
@@ -77,7 +79,7 @@ dat <- rbind(domY,domZ)
 plot(dat$day, dat$value, cex=dat$weights*2, xlab="Day of year",ylab="Dominant period")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
 Removing outliers
 -----------------
@@ -91,7 +93,7 @@ plot(dat$day, dat$value, xlab="Day of year",ylab="Dominant period")
 points(dat2$day, dat2$value, pch=20, col="purple")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
 Fitting phenology model described by [Elmore et al. 2012](http://onlinelibrary.wiley.com/doi/10.1111/j.1365-2486.2011.02521.x/full)
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -117,4 +119,4 @@ points(dat2$day, fitted(mod)/10, pch=20, col="red", lwd=4)
 abline(v=c(coef(mod)[3],coef(mod)[5]))
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-7-1.png)
